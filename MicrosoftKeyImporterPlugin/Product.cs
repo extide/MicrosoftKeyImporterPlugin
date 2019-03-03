@@ -1,39 +1,30 @@
-using System;
 using System.Collections.Generic;
 using System.Xml;
 
 namespace MicrosoftKeyImporterPlugin
 {
-    class Product
+    internal class Product
     {
-        private XmlNode _node;
-        public Product(XmlNode node)
-        {
-            _node = node;
-        }
+        private readonly XmlNode _node;
 
-        public String Name { get { return _node.Attributes["Name"].Value.Replace("\n", string.Empty); } }
+        public Product(XmlNode node) => _node = node;
 
-        public List<Key> Keys
-        {
+        public string Name => _node.Attributes?["Name"].Value.Replace("\n", string.Empty);
 
-            get {
-                return GetKeys();
-            }
-        }
+        public IEnumerable<Key> Keys => GetKeys();
 
-        private List<Key> GetKeys()
+        private IEnumerable<Key> GetKeys()
         {
             var keys = new List<Key>();
 
             foreach (XmlNode key in _node.ChildNodes)
             {
                 keys.Add(new Key
-                             {
-                                 Value = key.InnerText,
-                                 Type = key.Attributes != null ? key.Attributes["Type"].Value : string.Empty,
-                                 Description = key.FirstChild.NodeType == XmlNodeType.CDATA ? key.InnerText : string.Empty
-                             });
+                {
+                    Value = key.InnerText,
+                    Type = key.Attributes != null ? key.Attributes["Type"].Value : string.Empty,
+                    Description = key.FirstChild.NodeType == XmlNodeType.CDATA ? key.InnerText : string.Empty
+                });
             }
 
             return keys;

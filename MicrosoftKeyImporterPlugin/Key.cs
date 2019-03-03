@@ -1,6 +1,6 @@
 namespace MicrosoftKeyImporterPlugin
 {
-    class Key
+    internal class Key
     {
         public string Value { get; set; }
         public string Type { get; set; }
