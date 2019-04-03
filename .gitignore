@@ -45,3 +45,4 @@ _ReSharper*/
 #NuGet
 packages/
 /.vs/MicrosoftKeyImporterPlugin/v16/Server/sqlite3
+/.vs
