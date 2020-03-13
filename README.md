@@ -4,6 +4,7 @@ MicrosoftKeyImporterPlugin
 KeePass 2 Import Plugin for MSDN and TechNet key export xml files.
 
 # How to use
+* Grab the latest release from the [releases section above](https://github.com/extide/MicrosoftKeyImporterPlugin/releases)
 * Drop the __MicrosoftKeyImporterPlugin.dll__ into your KeePass 2 program folder.
 * Open KeePass and choose __File -> Import...__
 * Under the __General__ section, select __MSDN or TechNet Keys XML__.
