@@ -2,6 +2,9 @@
 using KeePassLib;
 using KeePassLib.Interfaces;
 using KeePassLib.Security;
+using MicrosoftKeyImporterPlugin.Properties;
+using System.Drawing;
+using System.IO;
 using System.Xml;
 
 namespace MicrosoftKeyImporterPlugin
@@ -12,8 +15,9 @@ namespace MicrosoftKeyImporterPlugin
         public override bool SupportsExport => false;
         public override string FormatName => "MSDN or TechNet Keys XML";
         public override string DefaultExtension => "xml";
+        public override Image SmallIcon => Resources.Icon;
 
-        public override void Import(PwDatabase pwStorage, System.IO.Stream sInput, IStatusLogger slLogger)
+        public override void Import(PwDatabase pwStorage, Stream sInput, IStatusLogger slLogger)
         {
             XmlDocument document = new XmlDocument();
             document.Load(sInput);
@@ -65,7 +69,9 @@ namespace MicrosoftKeyImporterPlugin
             entry.Strings.Set(PwDefs.TitleField, new ProtectedString(database.MemoryProtection.ProtectTitle, key.Type));
             entry.Strings.Set(PwDefs.PasswordField, new ProtectedString(database.MemoryProtection.ProtectPassword, key.Value.Trim()));
             entry.Strings.Set(PwDefs.NotesField, new ProtectedString(database.MemoryProtection.ProtectNotes, note));
-            entry.Strings.Set("Product Name", new ProtectedString(true, product.Name));
+            entry.Strings.Set("Product Name", new ProtectedString(false, product.Name));
+
+            entry.AutoType.Enabled = false;
         }
 
         private static bool GroupContainsKeyAsPassword(PwGroup group, Key key)
