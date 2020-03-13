@@ -27,12 +27,12 @@ namespace MicrosoftKeyImporterPlugin
 
         public Key(XmlNode xmlNode)
         {
-            this.Value = xmlNode.FirstChild?.NodeType != XmlNodeType.CDATA ? HttpUtility.HtmlDecode(xmlNode.InnerText) : string.Empty;
-            this.ID = xmlNode.Attributes["ID"]?.Value;
-            this.Type = xmlNode.Attributes["Type"]?.Value;
-            this.ClaimedDate = xmlNode.Attributes["ClaimedDate"]?.Value;
-            this.Notes = xmlNode.Attributes["Notes"]?.Value;
-            this.Description = xmlNode.FirstChild?.NodeType == XmlNodeType.CDATA ? HttpUtility.HtmlDecode(xmlNode.InnerText) : string.Empty;
+            this.Value = xmlNode.FirstChild?.NodeType != XmlNodeType.CDATA ? HttpUtility.HtmlDecode(xmlNode.InnerText?.Trim()) : string.Empty;
+            this.ID = xmlNode.Attributes["ID"]?.Value?.Trim();
+            this.Type = xmlNode.Attributes["Type"]?.Value?.Trim();
+            this.ClaimedDate = xmlNode.Attributes["ClaimedDate"]?.Value?.Trim();
+            this.Notes = xmlNode.Attributes["Notes"]?.Value?.Trim();
+            this.Description = xmlNode.FirstChild?.NodeType == XmlNodeType.CDATA ? HttpUtility.HtmlDecode(xmlNode.InnerText?.Trim()) : string.Empty;
         }
     }
 }

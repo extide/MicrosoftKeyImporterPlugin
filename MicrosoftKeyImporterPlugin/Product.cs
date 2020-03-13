@@ -13,8 +13,8 @@ namespace MicrosoftKeyImporterPlugin
 
         public Product(XmlNode node)
         {
-            Name = node.Attributes?["Name"]?.Value?.Replace("\r", string.Empty).Replace("\n", string.Empty);
-            KeyRetrievalNote = node.Attributes?["KeyRetrievalNote"]?.Value;
+            Name = node.Attributes?["Name"]?.Value?.Trim()?.Replace("\r", string.Empty)?.Replace("\n", string.Empty);
+            KeyRetrievalNote = node.Attributes?["KeyRetrievalNote"]?.Value?.Trim();
 
             Keys = new List<Key>();
             foreach (XmlNode xmlNode in node.ChildNodes)
