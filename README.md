@@ -9,7 +9,8 @@ KeePass 2 Import Plugin for MSDN and TechNet key export xml files.
 * Under the __General__ section, select __MSDN or TechNet Keys XML__.
 * Select the KeysExport.xml file that you've exported from MSDN or TechNet and click __OK__.
 
-#FAQ
+# FAQ
+
 ## What will the keys look like in KeePass?
 The import process adds a __Microsoft Product Keys__ directory to the root of your KeePass database. For each separate product a new directory is created, and for each separate key code a KeePass entry is created with a default title equal to the type of key (Static Activation, etc.)
 
