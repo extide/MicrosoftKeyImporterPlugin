@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Web;
 using System.Xml;
 
@@ -19,20 +20,19 @@ namespace MicrosoftKeyImporterPlugin
             get { return _claimeddate; }
             private set
             {
-                DateTime time;
-                if (DateTime.TryParse(value, out time))
-                    _claimeddate = time.ToString("d");
+                if (DateTime.TryParse(value, out DateTime time))
+                    _claimeddate = time.ToString("d", CultureInfo.CurrentCulture);
             }
         }
 
         public Key(XmlNode xmlNode)
         {
-            this.Value = xmlNode.FirstChild?.NodeType != XmlNodeType.CDATA ? HttpUtility.HtmlDecode(xmlNode.InnerText?.Trim()) : string.Empty;
-            this.ID = xmlNode.Attributes["ID"]?.Value?.Trim();
-            this.Type = xmlNode.Attributes["Type"]?.Value?.Trim();
-            this.ClaimedDate = xmlNode.Attributes["ClaimedDate"]?.Value?.Trim();
-            this.Notes = xmlNode.Attributes["Notes"]?.Value?.Trim();
-            this.Description = xmlNode.FirstChild?.NodeType == XmlNodeType.CDATA ? HttpUtility.HtmlDecode(xmlNode.InnerText?.Trim()) : string.Empty;
+            Value = xmlNode.FirstChild?.NodeType != XmlNodeType.CDATA ? HttpUtility.HtmlDecode(xmlNode.InnerText?.Trim()) : string.Empty;
+            ID = xmlNode.Attributes["ID"]?.Value?.Trim();
+            Type = xmlNode.Attributes["Type"]?.Value?.Trim();
+            ClaimedDate = xmlNode.Attributes["ClaimedDate"]?.Value?.Trim();
+            Notes = xmlNode.Attributes["Notes"]?.Value?.Trim();
+            Description = xmlNode.FirstChild?.NodeType == XmlNodeType.CDATA ? HttpUtility.HtmlDecode(xmlNode.InnerText?.Trim()) : string.Empty;
         }
     }
 }
